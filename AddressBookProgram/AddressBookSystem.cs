@@ -34,6 +34,10 @@ namespace AddressBookProgram
             //add data in the list
             addresslist.Add(contact);
         }
+        /// <summary>
+        /// Uc3 Update Contact Using Name Of Person
+        /// </summary>
+        /// <param name="editName"></param>
         public void UpdateChaneges(String editName)
         {
             //check the name is present or not
@@ -80,6 +84,26 @@ namespace AddressBookProgram
                 else
                 {
                     Console.WriteLine("Contact not found in AddressBook");
+                }
+            }
+        }
+        /// <summary>
+        /// Uc4 Delect Contact 
+        /// </summary>
+        public void DelectConatct(string delectName)
+        {
+            foreach(var data in addresslist)
+            {
+                if(delectName.Equals(data.FirstName) || delectName.Equals(data.LastName))
+                {
+                    Console.WriteLine("Contact Found");
+                    addresslist.Remove(data);
+                    Console.WriteLine("Remove Contact");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Contact not found");
                 }
             }
         }
