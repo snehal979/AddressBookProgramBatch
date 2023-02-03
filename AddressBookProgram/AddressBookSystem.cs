@@ -8,12 +8,13 @@ namespace AddressBookProgram
 {
     public class AddressBookSystem
     {
-        Contact contact = new Contact();
+        List<Contact> addresslist = new List<Contact>();
         /// <summary>
         /// Uc2 Create Contact
         /// </summary>
         public void CreateContact()
         {
+            Contact contact = new Contact();
             Console.WriteLine("Enter the First Name");
             contact.FirstName = Console.ReadLine();
             Console.WriteLine("Enter the Last Name");
@@ -30,16 +31,70 @@ namespace AddressBookProgram
             contact.PhoneNUmber = Console.ReadLine();
             Console.WriteLine("Enter the Email");
             contact.Email = Console.ReadLine();
-
+            //add data in the list
+            addresslist.Add(contact);
+        }
+        public void UpdateChaneges(String editName)
+        {
+            //check the name is present or not
+            foreach(var data in addresslist)
+            {
+                if(editName.Equals(data.FirstName) || editName.Equals(data.LastName))
+                {
+                    Char ch;
+                    do
+                    {
+                        Console.WriteLine("Select one which is edit" + "\n" + "Select 1.Address 2.City 3.State 4.Zip 5.PhoneNumber 6.Email ");
+                        int choice = Convert.ToInt32(Console.ReadLine());
+                        switch (choice)
+                        {
+                            case 1:
+                                Console.WriteLine("Enter the Address");
+                                data.Address = Console.ReadLine();
+                                break;
+                            case 2:
+                                Console.WriteLine("Enter the City");
+                                data.City = Console.ReadLine();
+                                break;
+                            case 3:
+                                Console.WriteLine("Enter the State ");
+                                data.State = Console.ReadLine();
+                                break;
+                            case 4:
+                                Console.WriteLine("Enter the Zip");
+                                data.Zip = Convert.ToInt64(Console.ReadLine());
+                                break;
+                            case 5:
+                                Console.WriteLine("Enter the PhoneNumber");
+                                data.PhoneNUmber = Console.ReadLine();
+                                break;
+                            case 6:
+                                Console.WriteLine("Enter the Email");
+                                data.Email = Console.ReadLine();
+                                break;
+                        }
+                        Console.WriteLine("Do Want Again Edit The contact Y oR N");
+                        ch = Convert.ToChar(Console.ReadLine().ToUpper());
+                    } while (ch.Equals('Y'));
+                }
+                else
+                {
+                    Console.WriteLine("Contact not found in AddressBook");
+                }
+            }
         }
         /// <summary>
         /// Display Method
         /// </summary>
         public void Display()
         {
-            Console.WriteLine("Contact Details:" + "\n" + "FirstName: " + contact.FirstName +
+            foreach(var contact in addresslist)
+            {
+                Console.WriteLine("Contact Details:" + "\n" + "FirstName: " + contact.FirstName +
                    "\n" + "LastName: " + contact.LastName + "\n" + "Address: " + contact.Address + "\n" + "City: " + contact.City + "\n"
                    + "State: " + contact.State + "\n" + "Zip: " + contact.Zip + "\n" + "PhoneNumber: " + contact.PhoneNUmber + "\n" + "Email: " + contact.Email);
+            }
+            
         }
     }
 }
