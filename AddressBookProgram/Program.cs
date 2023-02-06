@@ -20,11 +20,11 @@ namespace AddressBookProgram
                         bookSystem.Display();
                         break;
                     case 2:
-                        bookSystem.UpdateChaneges("Snehal");
+                        bookSystem.UpdateChaneges();
                         bookSystem.Display();
                         break;
                     case 3:
-                        bookSystem.DelectConatct("Snehal");
+                        bookSystem.DelectConatct();
                         bookSystem.Display();
                         break;
                     case 4:

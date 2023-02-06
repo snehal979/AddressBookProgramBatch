@@ -8,6 +8,9 @@ namespace AddressBookProgram
 {
     public class AddressBookSystem
     {
+        /// <summary>
+        /// Uc5 Collection of the Add Multiple Contact
+        /// </summary>
         List<Contact> addresslist = new List<Contact>();
         /// <summary>
         /// Uc2 Create Contact
@@ -15,6 +18,7 @@ namespace AddressBookProgram
         public void CreateContact()
         {
             Contact contact = new Contact();
+
             Console.WriteLine("Enter the First Name");
             contact.FirstName = Console.ReadLine();
             Console.WriteLine("Enter the Last Name");
@@ -38,10 +42,12 @@ namespace AddressBookProgram
         /// Uc3 Update Contact Using Name Of Person
         /// </summary>
         /// <param name="editName"></param>
-        public void UpdateChaneges(String editName)
+        public void UpdateChaneges()
         {
+            Console.WriteLine("Enter the name Want Update");
+            String editName = Console.ReadLine();
             //check the name is present or not
-            foreach(var data in addresslist)
+            foreach (var data in addresslist)
             {
                 if(editName.Equals(data.FirstName) || editName.Equals(data.LastName))
                 {
@@ -90,9 +96,11 @@ namespace AddressBookProgram
         /// <summary>
         /// Uc4 Delect Contact 
         /// </summary>
-        public void DelectConatct(string delectName)
+        public void DelectConatct()
         {
-            foreach(var data in addresslist)
+            Console.WriteLine("Enter the name Want Update");
+            string delectName = Console.ReadLine();
+            foreach (var data in addresslist)
             {
                 if(delectName.Equals(data.FirstName) || delectName.Equals(data.LastName))
                 {
@@ -120,5 +128,6 @@ namespace AddressBookProgram
             }
             
         }
+        
     }
 }
