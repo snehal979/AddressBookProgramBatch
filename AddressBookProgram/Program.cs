@@ -11,7 +11,7 @@ namespace AddressBookProgram
             bool flag = true;
             while (flag)
             {
-                Console.WriteLine("Hint 1.Create Contact \n 2.Upadate Contact \n3 Delect Contact\n 4.Display \n 5.Exist");
+                Console.WriteLine("Hint 1.Create Contact \n 2.Upadate Contact \n3 Delect Contact\n 4.Display \n5.Dicitionary \n6.DisplayDicitionary\n 5.Exist");
                 int select = Convert.ToInt32(Console.ReadLine());
                 switch (select)
                 {
@@ -31,6 +31,12 @@ namespace AddressBookProgram
                         bookSystem.Display();
                         break;
                     case 5:
+                        bookSystem.CreateDicitionay();
+                        break;
+                    case 6:
+                        bookSystem.Display();
+                        break;
+                    case 7:
                         flag =false;
                         Console.WriteLine("Exist");
                         break;

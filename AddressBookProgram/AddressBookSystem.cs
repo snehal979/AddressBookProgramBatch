@@ -12,6 +12,7 @@ namespace AddressBookProgram
         /// Uc5 Collection of the Add Multiple Contact
         /// </summary>
         List<Contact> addresslist = new List<Contact>();
+        Dictionary<string, List<Contact>> addressDicitionary = new Dictionary<string, List<Contact>>();
         /// <summary>
         /// Uc2 Create Contact
         /// </summary>
@@ -127,6 +128,40 @@ namespace AddressBookProgram
                    + "State: " + contact.State + "\n" + "Zip: " + contact.Zip + "\n" + "PhoneNumber: " + contact.PhoneNUmber + "\n" + "Email: " + contact.Email);
             }
             
+        }
+        /// <summary>
+        /// Uc6 Dicitionay Add Multiple Contact In addressBook  (not allow same key)
+        /// </summary>
+        public void CreateDicitionay()
+        {
+            try
+            {
+                Console.WriteLine("Enter the name Which Add In dicitionary");
+                string nameDicitionary = Console.ReadLine();
+                addressDicitionary.Add(nameDicitionary, addresslist);
+                Console.WriteLine("Add Contact in Dicitionary");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
+        }
+        /// <summary>
+        /// Display Dicitionary - on key value
+        /// </summary>
+        public void DisplayDicitionay()
+        {
+            foreach(var data in addressDicitionary)
+            {
+                Console.WriteLine(data.Key);
+                foreach(var contact in data.Value)
+                {
+                    Console.WriteLine("Contact Details:" + "\n" + "FirstName: " + contact.FirstName +
+                  "\n" + "LastName: " + contact.LastName + "\n" + "Address: " + contact.Address + "\n" + "City: " + contact.City + "\n"
+                  + "State: " + contact.State + "\n" + "Zip: " + contact.Zip + "\n" + "PhoneNumber: " + contact.PhoneNUmber + "\n" + "Email: " + contact.Email);
+                }
+            }
         }
         
     }
