@@ -13,6 +13,8 @@ namespace AddressBookProgram
         /// </summary>
         List<Contact> addresslist = new List<Contact>();
         Dictionary<string, List<Contact>> addressDicitionary = new Dictionary<string, List<Contact>>();
+        List<Contact> citylist = new List<Contact>();
+        List<Contact> statelist = new List<Contact>();
         /// <summary>
         /// Uc2 Create Contact
         /// </summary>
@@ -181,6 +183,50 @@ namespace AddressBookProgram
                 Display();
             }
         }
-        
+        /// <summary>
+        /// UC8 Search Person In  city and state present in the Address book
+        /// </summary>
+        /// <param name="addresslist"></param>
+        /// <param name="Method"></param>
+        public void SearchPersonInContactCityOrState(string searchName)
+        { 
+            Console.WriteLine("1.Search Person In City\n2.Search Person In State");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            switch (choice)
+            {
+                case 1:
+                    Console.WriteLine("Enter the name of city");
+                    string cityName = Console.ReadLine();
+                    Console.WriteLine(" CITY :"+cityName);
+                 
+                    foreach (var data in addresslist.FindAll(e => e.City == cityName))
+                    {
+                        citylist.Add(data); //Add data in city list vis
+                        if (citylist.Any(e => e.FirstName==searchName)) //then serach person is present or not 
+                        {
+                            Console.WriteLine("Person With Name {0} is found in the AddressBook in City {1}", searchName, cityName);
+                            return;
+                        }
+                    }
+                    Console.WriteLine("Person With Name {0} is not found in the AddressBook in City {1}", searchName, cityName);
+                    break;
+                case 2:
+                    Console.WriteLine("Enter the name of city");
+                    string stateName = Console.ReadLine();
+                    Console.WriteLine(" State :"+stateName);
+
+                    foreach (var data in addresslist.FindAll(e => e.State == stateName))
+                    {
+                        statelist.Add(data); //add data in state vis
+                        if (statelist.Any(e => e.FirstName==searchName))//then serach person is present or not 
+                        {
+                            Console.WriteLine("Person With Name {0} is found in the AddressBook in City {1}", searchName, stateName);
+                            return;
+                        }
+                    }
+                    Console.WriteLine("Person With Name {0} is not found in the AddressBook in City {1}", searchName, stateName);
+                    break;
+            }
+        }
     }
 }
