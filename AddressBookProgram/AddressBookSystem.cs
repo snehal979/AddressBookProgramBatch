@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +16,8 @@ namespace AddressBookProgram
         Dictionary<string, List<Contact>> addressDicitionary = new Dictionary<string, List<Contact>>();
         List<Contact> citylist = new List<Contact>();
         List<Contact> statelist = new List<Contact>();
+        Dictionary<string, List<Contact>> citiesDicitionary = new Dictionary<string, List<Contact>>();
+        Dictionary<string, List<Contact>> statesDicitionary = new Dictionary<string, List<Contact>>();
         /// <summary>
         /// Uc2 Create Contact
         /// </summary>
@@ -143,28 +146,14 @@ namespace AddressBookProgram
                 string nameDicitionary = Console.ReadLine();
                 addressDicitionary.Add(nameDicitionary, addresslist);
                 Console.WriteLine("Add Contact in Dicitionary");
+                //Diplay Dicitionay Method
+                DisplayDicitionayForAll(addressDicitionary);
             }
             catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
             
-        }
-        /// <summary>
-        /// Display Dicitionary - on key value
-        /// </summary>
-        public void DisplayDicitionay()
-        {
-            foreach(var data in addressDicitionary)
-            {
-                Console.WriteLine(data.Key);
-                foreach(var contact in data.Value)
-                {
-                    Console.WriteLine("Contact Details:" + "\n" + "FirstName: " + contact.FirstName +
-                  "\n" + "LastName: " + contact.LastName + "\n" + "Address: " + contact.Address + "\n" + "City: " + contact.City + "\n"
-                  + "State: " + contact.State + "\n" + "Zip: " + contact.Zip + "\n" + "PhoneNumber: " + contact.PhoneNUmber + "\n" + "Email: " + contact.Email);
-                }
-            }
         }
         /// <summary>
         /// Uc 7 Duplicate Data of person (COLLECTION DEMO) and (LAMBDA)
@@ -197,7 +186,7 @@ namespace AddressBookProgram
                 case 1:
                     Console.WriteLine("Enter the name of city");
                     string cityName = Console.ReadLine();
-                    Console.WriteLine(" CITY :"+cityName);
+                    Console.WriteLine(" City :"+cityName);
                  
                     foreach (var data in addresslist.FindAll(e => e.City == cityName))
                     {
@@ -211,7 +200,7 @@ namespace AddressBookProgram
                     Console.WriteLine("Person With Name {0} is not found in the AddressBook in City {1}", searchName, cityName);
                     break;
                 case 2:
-                    Console.WriteLine("Enter the name of city");
+                    Console.WriteLine("Enter the name of state");
                     string stateName = Console.ReadLine();
                     Console.WriteLine(" State :"+stateName);
 
@@ -220,12 +209,65 @@ namespace AddressBookProgram
                         statelist.Add(data); //add data in state vis
                         if (statelist.Any(e => e.FirstName==searchName))//then serach person is present or not 
                         {
-                            Console.WriteLine("Person With Name {0} is found in the AddressBook in City {1}", searchName, stateName);
+                            Console.WriteLine("Person With Name {0} is found in the AddressBook in state {1}", searchName, stateName);
                             return;
                         }
                     }
-                    Console.WriteLine("Person With Name {0} is not found in the AddressBook in City {1}", searchName, stateName);
+                    Console.WriteLine("Person With Name {0} is not found in the AddressBook in state {1}", searchName, stateName);
                     break;
+            }
+        }
+        /// <summary>
+        /// Uc 9 View Person In City Or State using Dicitionary()
+        /// </summary>
+        public void ViewPersonInCityOrState()
+        {
+            Console.WriteLine("1.Search Person In City\n2.Search Person In State");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            switch (choice)
+            {
+                case 1:
+                    Console.WriteLine("Enter the cityName Which Add In dicitionary");
+                    string cityNameDicitionary = Console.ReadLine();
+                    var cityAddressBook = citylist.FindAll(e => e.City == cityNameDicitionary);
+                    foreach (var data in cityAddressBook)
+                    {
+                        citiesDicitionary.Add(cityNameDicitionary, citylist);
+                        Console.WriteLine("Add City in Dicitionary");
+                        //Diplay Dicitionay Method
+                        DisplayDicitionayForAll(citiesDicitionary);
+                        return;
+                    }
+                    break;
+                case 2:
+                     Console.WriteLine("Enter the State Name Which Add In dicitionary");
+                    string stateNameDicitionary = Console.ReadLine();
+                    var stateAddressBook = statelist.FindAll(e => e.State == stateNameDicitionary);
+                    foreach (var data in stateAddressBook)
+                    {
+                        statesDicitionary.Add(stateNameDicitionary, statelist);
+                        Console.WriteLine("Add State in Dicitionary");
+                        //Diplay Dicitionay Method
+                        DisplayDicitionayForAll(statesDicitionary);
+                        return;
+                    }
+                    break;
+            }
+        }
+        /// <summary>
+        /// Display Dicitionary - on key value
+        /// </summary>
+        public void DisplayDicitionayForAll(Dictionary<string, List<Contact>> nameDicitionary)
+        {
+            foreach (var data in nameDicitionary)
+            {
+                Console.WriteLine(data.Key);
+                foreach (var contact in data.Value)
+                {
+                    Console.WriteLine("Contact Details:" + "\n" + "FirstName: " + contact.FirstName +
+                  "\n" + "LastName: " + contact.LastName + "\n" + "Address: " + contact.Address + "\n" + "City: " + contact.City + "\n"
+                  + "State: " + contact.State + "\n" + "Zip: " + contact.Zip + "\n" + "PhoneNumber: " + contact.PhoneNUmber + "\n" + "Email: " + contact.Email);
+                }
             }
         }
     }
