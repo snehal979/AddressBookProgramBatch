@@ -37,7 +37,8 @@ namespace AddressBookProgram
             Console.WriteLine("Enter the Email");
             contact.Email = Console.ReadLine();
             //add data in the list
-            addresslist.Add(contact);
+            //Call DuplicateMethod to check Duplicate contact
+            CheckDuplicatedContanct(addresslist, contact);
         }
         /// <summary>
         /// Uc3 Update Contact Using Name Of Person
@@ -161,6 +162,23 @@ namespace AddressBookProgram
                   "\n" + "LastName: " + contact.LastName + "\n" + "Address: " + contact.Address + "\n" + "City: " + contact.City + "\n"
                   + "State: " + contact.State + "\n" + "Zip: " + contact.Zip + "\n" + "PhoneNumber: " + contact.PhoneNUmber + "\n" + "Email: " + contact.Email);
                 }
+            }
+        }
+        /// <summary>
+        /// Uc 7 Duplicate Data of person (COLLECTION DEMO) and (LAMBDA)
+        /// </summary>
+        public void CheckDuplicatedContanct(List<Contact> addresslist,Contact contact)
+        {
+            if(addresslist.Exists(e => e.FirstName == contact.FirstName && e.LastName == contact.LastName)) //Lambda Experssion
+            {
+                Console.WriteLine("*****************");
+                Console.WriteLine("The person name is already exits");
+            }
+            else
+            {
+                Console.WriteLine("The person name is not already exits then add to the list");
+                addresslist.Add(contact);
+                Display();
             }
         }
         

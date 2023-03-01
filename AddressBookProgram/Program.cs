@@ -17,7 +17,7 @@ namespace AddressBookProgram
                 {
                     case 1:
                         bookSystem.CreateContact();
-                        bookSystem.Display();
+                        //bookSystem.Display();
                         break;
                     case 2:
                         bookSystem.UpdateChaneges();
