@@ -35,9 +35,9 @@ namespace AddressBookProgram
                         bookSystem.CreateDicitionay();
                         break;
                     case 6:
-                        Console.WriteLine("Enter the name Search Person In Contact City Or State");
-                        string searchName = Console.ReadLine();
-                        bookSystem.SearchPersonInContactCityOrState(searchName);
+                        Console.WriteLine("1.Search Person In City\n2.Search Person In State");
+                        int choice = Convert.ToInt32(Console.ReadLine());
+                        bookSystem.SearchPersonInContactCityOrState(choice);
                         break;
                     case 7:
                         bookSystem.ViewPersonInCityOrState();

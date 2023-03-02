@@ -177,43 +177,52 @@ namespace AddressBookProgram
         /// </summary>
         /// <param name="addresslist"></param>
         /// <param name="Method"></param>
-        public void SearchPersonInContactCityOrState(string searchName)
-        { 
-            Console.WriteLine("1.Search Person In City\n2.Search Person In State");
-            int choice = Convert.ToInt32(Console.ReadLine());
+        public void SearchPersonInContactCityOrState(int choice)
+        {
+            Console.WriteLine("Enter the name Search Person In Contact City Or State");
+            string searchName = Console.ReadLine();
             switch (choice)
             {
                 case 1:
                     Console.WriteLine("Enter the name of city");
                     string cityName = Console.ReadLine();
-                    Console.WriteLine(" City :"+cityName);
+                   // Console.WriteLine(" City :"+cityName);
                  
                     foreach (var data in addresslist.FindAll(e => e.City == cityName))
                     {
                         citylist.Add(data); //Add data in city list vis
+
+                         //// Count of person Uc10 in City
+                        Console.WriteLine("Total Contact in The city is "+citylist.Count());
+
                         if (citylist.Any(e => e.FirstName==searchName)) //then serach person is present or not 
                         {
-                            Console.WriteLine("Person With Name {0} is found in the AddressBook in City {1}", searchName, cityName);
-                            return;
+                            Console.WriteLine("Name {0} is found in list {1}", searchName, cityName);
+                            return; //terminate method
+
                         }
                     }
-                    Console.WriteLine("Person With Name {0} is not found in the AddressBook in City {1}", searchName, cityName);
+                    Console.WriteLine("Name {0} is not found in list {1}", searchName, cityName);
                     break;
                 case 2:
                     Console.WriteLine("Enter the name of state");
                     string stateName = Console.ReadLine();
-                    Console.WriteLine(" State :"+stateName);
+                    //Console.WriteLine(" State :"+stateName);
 
                     foreach (var data in addresslist.FindAll(e => e.State == stateName))
                     {
                         statelist.Add(data); //add data in state vis
+
+                        //// Count of person Uc10 in state
+                        Console.WriteLine("Total Contact in The city is "+statelist.Count());
+
                         if (statelist.Any(e => e.FirstName==searchName))//then serach person is present or not 
                         {
-                            Console.WriteLine("Person With Name {0} is found in the AddressBook in state {1}", searchName, stateName);
-                            return;
+                            Console.WriteLine(" Name {0} is found in state {1}", searchName, stateName);
+                            return; //terminate method
                         }
                     }
-                    Console.WriteLine("Person With Name {0} is not found in the AddressBook in state {1}", searchName, stateName);
+                    Console.WriteLine(" Name {0} is not found in state {1}", searchName, stateName);
                     break;
             }
         }
@@ -238,7 +247,7 @@ namespace AddressBookProgram
                         DisplayDicitionayForAll(citiesDicitionary);
                         return;
                     }
-                    break;
+                 break;
                 case 2:
                      Console.WriteLine("Enter the State Name Which Add In dicitionary");
                     string stateNameDicitionary = Console.ReadLine();
@@ -251,7 +260,7 @@ namespace AddressBookProgram
                         DisplayDicitionayForAll(statesDicitionary);
                         return;
                     }
-                    break;
+                 break;
             }
         }
         /// <summary>
