@@ -264,6 +264,16 @@ namespace AddressBookProgram
             }
         }
         /// <summary>
+        /// Uc11 Sort the data of Address book by Alphabate of FirstName
+        /// </summary>
+        public void SortAddressBookData()
+        {
+            Console.WriteLine("List of Sort the data of Address book by Alphabate of FirstName");
+            addresslist.Sort((x,y) => string.Compare(x.FirstName,y.FirstName));
+             Display();
+                return; //Terminate method
+        }
+        /// <summary>
         /// Display Dicitionary - on key value
         /// </summary>
         public void DisplayDicitionayForAll(Dictionary<string, List<Contact>> nameDicitionary)

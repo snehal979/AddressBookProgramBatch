@@ -12,7 +12,7 @@ namespace AddressBookProgram
             while (flag)
             {
                 Console.WriteLine("Hint 1.Create Contact \n 2.Upadate Contact \n3 Delect Contact\n 4.Display \n5.Dicitionary \n6.Search Person In Contact City Or State" +
-                    "\n 7.ViewPersonInCityOrState \n 8.Exist");
+                    "\n 7.ViewPersonInCityOrState \n 8.Sort AddressBook List\n 9.Exist");
                 int select = Convert.ToInt32(Console.ReadLine());
                 switch (select)
                 {
@@ -43,6 +43,9 @@ namespace AddressBookProgram
                         bookSystem.ViewPersonInCityOrState();
                         break;
                     case 8:
+                        bookSystem.SortAddressBookData();
+                        break;
+                    case 9:
                         flag =false;
                         Console.WriteLine("Exist");
                         break;
