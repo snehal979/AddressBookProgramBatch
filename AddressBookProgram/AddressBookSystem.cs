@@ -304,7 +304,12 @@ namespace AddressBookProgram
                 }
                 return;
             }
-        }   
+            else
+            {
+                Console.WriteLine("Invalid Input");
+            }
+        }  
+
         /// <summary>
         /// Display Dicitionary - on key value
         /// </summary>
@@ -319,6 +324,46 @@ namespace AddressBookProgram
                   "\n" + "LastName: " + contact.LastName + "\n" + "Address: " + contact.Address + "\n" + "City: " + contact.City + "\n"
                   + "State: " + contact.State + "\n" + "Zip: " + contact.Zip + "\n" + "PhoneNumber: " + contact.PhoneNUmber + "\n" + "Email: " + contact.Email);
                 }
+            }
+        }
+        /// <summary>
+        /// Uc13 Ability to Read or Write the Address Book wit Persons Contact into a File using File IO
+        /// </summary>
+        public void FileEdit()
+        {
+            string filepathTxt = @"C:\Users\hp\Desktop\newBatch2\AddressBookProgram\AddressBookProgram\Files\AddressBookTxtFile.txt";
+            Console.WriteLine("hint 1.Txt File");
+            int choices = Convert.ToInt32(Console.ReadLine());
+            switch (choices)
+            {
+                case 1:
+                    WriteFile(filepathTxt);
+                    break;
+            }
+        }
+        ///// Read A txtfile AddressBook
+        public void ReadFile(string filepath)
+        {
+            using (StreamReader reader = File.OpenText(filepath))
+            {
+                string s = "";
+                while ((s = reader.ReadLine()) != null)
+                {
+                    Console.WriteLine(s);
+                }
+            }
+        }
+        //Write Txt File
+        public void WriteFile(string filepath)
+        {
+            using (StreamWriter writer = File.AppendText(filepath))
+            {
+                foreach (var item in addresslist)
+                {
+                    writer.WriteLine("\n"+item.FirstName+","+item.LastName+","+item.Address+","+item.City+","+item.State+","+item.Zip+","+item.PhoneNUmber+","+item.Email);
+                }
+                writer.Close();
+                ReadFile(filepath);
             }
         }
     }
