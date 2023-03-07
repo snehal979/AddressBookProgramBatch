@@ -269,10 +269,42 @@ namespace AddressBookProgram
         public void SortAddressBookData()
         {
             Console.WriteLine("List of Sort the data of Address book by Alphabate of FirstName");
-            addresslist.Sort((x,y) => string.Compare(x.FirstName,y.FirstName));
+            addresslist.Sort((x,y) => string.Compare(x.FirstName,y.FirstName)); 
              Display();
                 return; //Terminate method
         }
+        /// <summary>
+        /// Uc12 Search the data by City State and Zip;
+        /// </summary>
+        public void SortByCity_State_Zip()
+        {
+            Console.WriteLine("Hint 1.Sorted by city \n 2.Sorted by State \n 3.Sorted by Zip");
+            int num = Convert.ToInt16(Console.ReadLine());
+            if (num == 1)
+            {
+                foreach (var data in addresslist.OrderBy(x => x.City))
+                {
+                    Console.WriteLine(data.ToString());
+                }
+                return;
+            }
+            else if (num == 2)
+            {
+                foreach (var data in addresslist.OrderBy(x => x.State))
+                {
+                    Console.WriteLine(data.ToString());
+                }
+                return;
+            }
+            else if (num == 3)
+            {
+                foreach (var data in addresslist.OrderBy(x => x.Zip))
+                {
+                    Console.WriteLine(data.ToString());
+                }
+                return;
+            }
+        }   
         /// <summary>
         /// Display Dicitionary - on key value
         /// </summary>
