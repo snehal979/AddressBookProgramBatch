@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace AddressBookProgram
@@ -330,23 +331,9 @@ namespace AddressBookProgram
             }
         }
         /// <summary>
-        /// Uc13 Ability to Read or Write the Address Book wit Persons Contact into a File using File IO
+        /// Uc13 Read method for txt
         /// </summary>
-        public void FileEdit()
-        {
-            string filepathTxt = @"C:\Users\hp\Desktop\newBatch2\AddressBookProgram\AddressBookProgram\Files\AddressBookTxtFile.txt";
-            Console.WriteLine("hint 1.Txt File 2.Csv File ");
-            int choices = Convert.ToInt32(Console.ReadLine());
-            switch (choices)
-            {
-                case 1:
-                    WriteFile(filepathTxt);
-                    break;
-                case 2:
-                    CsvHandingFile(filepathTxt);
-                    break;
-            }
-        }
+        /// <param name="filepath"></param>
         ///// Read A txtfile AddressBook
         public void ReadFile(string filepath)
         {
@@ -360,6 +347,10 @@ namespace AddressBookProgram
             }
         }
         //Write Txt File
+        /// <summary>
+        /// Uc13 Write Method for Txt
+        /// </summary>
+        /// <param name="filepath"></param>
         public void WriteFile(string filepath)
         {
             using (StreamWriter writer = File.AppendText(filepath))
@@ -373,7 +364,7 @@ namespace AddressBookProgram
             }
         }
         /// <summary>
-        /// Uc14 Csv File Read And Write file in Other File
+        /// Uc14 Csv File Read And Write file in Other File CSV File
         /// </summary>
         /// <param name="importFilepath"></param>
         /// <param name="addresslist"></param>
@@ -405,6 +396,47 @@ namespace AddressBookProgram
                 {
                     csvExport.WriteRecords(records);
                 }
+            }
+        }
+        /// <summary>
+        /// Uc15 Csv File Read And Write file in Json File
+        /// </summary>
+        public void JsonFileAddressBook(string importFilePath)
+        {
+            string newJsonFilePath = @"C:\Users\hp\Desktop\newBatch2\AddressBookProgram\AddressBookProgram\Files\NewJsonFile.json";
+            //Read data from file
+            using (var reader = new StreamReader(importFilePath))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                var records = csv.GetRecords<Contact>().ToList();
+                //write data in json file
+                JsonSerializer jsonSerializer = new JsonSerializer();
+                using StreamWriter sw = new StreamWriter(newJsonFilePath);
+                using (JsonWriter writer = new JsonTextWriter(sw))
+                {
+                    jsonSerializer.Serialize(writer, records);
+                }
+            }
+        }
+        /// <summary>
+        /// Uc13,Uc14,Uc15
+        /// </summary>
+        public void FileEdit()
+        {
+            string filepathTxt = @"C:\Users\hp\Desktop\newBatch2\AddressBookProgram\AddressBookProgram\Files\AddressBookTxtFile.txt";
+            Console.WriteLine("hint 1.Txt File 2.Csv File \n 3.JsonFile ");
+            int choices = Convert.ToInt32(Console.ReadLine());
+            switch (choices)
+            {
+                case 1:
+                    WriteFile(filepathTxt);
+                    break;
+                case 2:
+                    CsvHandingFile(filepathTxt);
+                    break;
+                case 3:
+                    JsonFileAddressBook(filepathTxt);
+                    break;
             }
         }
     }
