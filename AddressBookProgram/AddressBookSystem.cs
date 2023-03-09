@@ -1,5 +1,8 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
+using System.Formats.Asn1;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -332,12 +335,15 @@ namespace AddressBookProgram
         public void FileEdit()
         {
             string filepathTxt = @"C:\Users\hp\Desktop\newBatch2\AddressBookProgram\AddressBookProgram\Files\AddressBookTxtFile.txt";
-            Console.WriteLine("hint 1.Txt File");
+            Console.WriteLine("hint 1.Txt File 2.Csv File ");
             int choices = Convert.ToInt32(Console.ReadLine());
             switch (choices)
             {
                 case 1:
                     WriteFile(filepathTxt);
+                    break;
+                case 2:
+                    CsvHandingFile(filepathTxt);
                     break;
             }
         }
@@ -364,6 +370,41 @@ namespace AddressBookProgram
                 }
                 writer.Close();
                 ReadFile(filepath);
+            }
+        }
+        /// <summary>
+        /// Uc14 Csv File Read And Write file in Other File
+        /// </summary>
+        /// <param name="importFilepath"></param>
+        /// <param name="addresslist"></param>
+        public void CsvHandingFile(string importFilepath)
+        {
+            string exportfilepath = @"C:\Users\hp\Desktop\newBatch2\AddressBookProgram\AddressBookProgram\Files\ExportFile.csv";
+            //read file
+            using (var reader = new StreamReader(importFilepath))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                var records = csv.GetRecords<Contact>().ToList();
+                Console.WriteLine("Read data successfully from file csv");
+                foreach (Contact data in records)
+                {
+                    Console.WriteLine("\t" + data.FirstName);
+                    Console.WriteLine("\t" + data.LastName);
+                    Console.WriteLine("\t" + data.Address);
+                    Console.WriteLine("\t" + data.City);
+                    Console.WriteLine("\t" + data.State);
+                    Console.WriteLine("\t" + data.Zip);
+                    Console.WriteLine("\t" + data.PhoneNUmber);
+                    Console.WriteLine("\t" + data.Email);
+                    Console.WriteLine("\n");
+                }
+                Console.WriteLine("\n----------write to csv file--------------");
+                // write csv file
+                using var writer = new StreamWriter(exportfilepath);
+                using var csvExport = new CsvWriter(writer, CultureInfo.InvariantCulture);
+                {
+                    csvExport.WriteRecords(records);
+                }
             }
         }
     }
