@@ -8,11 +8,13 @@ namespace AddressBookProgram
         {
             Console.WriteLine("Welcom To Address Book Program");
             AddressBookSystem bookSystem = new AddressBookSystem();
+            AddressBook_ADO_NET addressBook_ADO_NET = new AddressBook_ADO_NET();
+
             bool flag = true;
             while (flag)
             {
                 Console.WriteLine("Hint 1.Create Contact \n 2.Upadate Contact \n3 Delect Contact\n 4.Display \n5.Dicitionary \n6.Search Person In Contact City Or State" +
-                    "\n 7.ViewPersonInCityOrState \n 8.Sort AddressBook List \n 9.Sort List by City_State_Zip\n 10.File Write \n 11.Exist");
+                    "\n 7.ViewPersonInCityOrState \n 8.Sort AddressBook List \n 9.Sort List by City_State_Zip\n 10.File Write \n 11.Retrive Data From Database by Ado.net \n 12.Exist");
                 int select = Convert.ToInt32(Console.ReadLine());
                 switch (select)
                 {
@@ -52,6 +54,10 @@ namespace AddressBookProgram
                         bookSystem.FileEdit();
                         break;
                     case 11:
+                        string retriveQuery = @"SELECT * FROM AddressBookList ";
+                        addressBook_ADO_NET.GetAllAddressBookData(retriveQuery);
+                        break;
+                    case 12:
                         flag =false;
                         Console.WriteLine("Exist");
                         break;
