@@ -15,7 +15,7 @@ namespace AddressBookProgram
             {
                 Console.WriteLine("Hint 1.Create Contact \n 2.Upadate Contact \n3 Delect Contact\n 4.Display \n5.Dicitionary \n6.Search Person In Contact City Or State" +
                     "\n 7.ViewPersonInCityOrState \n 8.Sort AddressBook List \n 9.Sort List by City_State_Zip\n 10.File Write \n 11.Retrive Data From Database by Ado.net" +
-                    "\n12.Update Record in sql \n13.Retrive data for perticular period \n 14.Count NoOfContact By CityOrState \n 15.Exist");
+                    "\n12.Update Record in sql \n13.Retrive data for perticular period \n 14.Count NoOfContact By CityOrState \n 15.Add Data in Sql\n 16.Exist");
                 int select = Convert.ToInt32(Console.ReadLine());
                 switch (select)
                 {
@@ -76,6 +76,10 @@ namespace AddressBookProgram
                        // Console.WriteLine("Total address in State "+b);
                         break;
                     case 15:
+                        string query = @"INSERT INTO AddressBookList VALUES('Manashi','Rathod','Plot 13 Valley','Bangalore','KT',646463,8774743344,'manish@gmail.com','1994-09-02') ";
+                        addressBook_ADO_NET.AddRecordEmployee(query);
+                        break;
+                    case 16:
                         flag =false;
                         Console.WriteLine("Exist");
                         break;

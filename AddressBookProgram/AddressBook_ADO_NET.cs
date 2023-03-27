@@ -13,6 +13,7 @@ namespace AddressBookProgram
         List<Contact> addressList = new List<Contact>();
         public static  string connectionString = "Data Source =(localdb)\\MSSQLLocalDB;Initial Catalog =AddressBook_Ado";
         SqlConnection sqlconnection = new SqlConnection(connectionString);
+      
         /// <summary>
         /// Uc16 -Retrive All Data in sql Using Ado.Net
         /// Uc18
@@ -119,6 +120,41 @@ namespace AddressBookProgram
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+            finally
+            {
+                this.sqlconnection.Close();
+            }
+        }
+        /// <summary>
+        /// Uc20 Add Address Contact
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public void AddRecordEmployee( string query)
+        {
+            try
+            {
+                using (this.sqlconnection)
+                {
+                    this.sqlconnection.Open();
+                    SqlCommand command = new SqlCommand(query, this.sqlconnection);
+                    command.CommandType = CommandType.Text;
+                    int a = command.ExecuteNonQuery();
+                    if (a>0)
+                    {
+                        Console.WriteLine("Data Add in the employeePayRoleTable serivces");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Not Data Add in the employeePayRoleTable serivces");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Invalid Input");
             }
             finally
             {
