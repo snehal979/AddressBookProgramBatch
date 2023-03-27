@@ -11,6 +11,8 @@ namespace AddressBookProgram
     public class AddressBook_ADO_NET
     {
         List<Contact> addressList = new List<Contact>();
+        List<Contact> address_TDD = new List<Contact>(); //Multi Thread
+        Contact contact = new Contact(); //multi thread
         public static  string connectionString = "Data Source =(localdb)\\MSSQLLocalDB;Initial Catalog =AddressBook_Ado";
         SqlConnection sqlconnection = new SqlConnection(connectionString);
       
@@ -160,6 +162,40 @@ namespace AddressBookProgram
             {
                 this.sqlconnection.Close();
             }
+        }
+        /// <summary>
+        /// Uc21 Add Address Contact Multi Threading
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public void AddRecordEmployee_WithThread(string query)
+        {
+            try
+            {
+                using (this.sqlconnection)
+                {
+                    this.sqlconnection.Open();
+                    SqlCommand command = new SqlCommand(query, this.sqlconnection);
+                    command.CommandType = CommandType.Text;
+                    int a = command.ExecuteNonQuery();
+                    this.sqlconnection.Close();
+                    Task thread = new Task(() =>
+                    {
+                        Console.WriteLine(" Employee being added ");
+                        if (a>0)
+                        {
+                            Console.WriteLine("Employee added");
+                        }
+                    });
+                    thread.Start();
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+       
         }
     }
 }

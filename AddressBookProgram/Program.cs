@@ -15,7 +15,8 @@ namespace AddressBookProgram
             {
                 Console.WriteLine("Hint 1.Create Contact \n 2.Upadate Contact \n3 Delect Contact\n 4.Display \n5.Dicitionary \n6.Search Person In Contact City Or State" +
                     "\n 7.ViewPersonInCityOrState \n 8.Sort AddressBook List \n 9.Sort List by City_State_Zip\n 10.File Write \n 11.Retrive Data From Database by Ado.net" +
-                    "\n12.Update Record in sql \n13.Retrive data for perticular period \n 14.Count NoOfContact By CityOrState \n 15.Add Data in Sql\n 16.Exist");
+                    "\n12.Update Record in sql \n13.Retrive data for perticular period \n 14.Count NoOfContact By CityOrState \n 15.Add Data in Sql\n " +
+                    " 16.Add Address Contact Multi Threading \n 17.Exist");
                 int select = Convert.ToInt32(Console.ReadLine());
                 switch (select)
                 {
@@ -80,6 +81,13 @@ namespace AddressBookProgram
                         addressBook_ADO_NET.AddRecordEmployee(query);
                         break;
                     case 16:
+                        string query1 = @"INSERT INTO AddressBookList VALUES('Rekha','Wani','Plot 16 Valley','Mumbai','MH',646463,8774743344,'manish@gmail.com','1994-09-02') ";
+                        DateTime starttime = DateTime.Now;
+                        addressBook_ADO_NET.AddRecordEmployee_WithThread(query1);
+                        DateTime endtime = DateTime.Now;
+                        Console.WriteLine("Duration without threading is "+(endtime-starttime));
+                        break;
+                    case 17:
                         flag =false;
                         Console.WriteLine("Exist");
                         break;

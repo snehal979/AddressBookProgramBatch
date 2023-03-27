@@ -25,5 +25,6 @@ namespace AddressBookMsTesting
             string actual = addressBook_ADO_NET.UpdateRecordFromAddressBook(updateQuery);
             Assert.AreEqual("Update", actual);
         }
+
     }
 }
