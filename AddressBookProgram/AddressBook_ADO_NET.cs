@@ -11,7 +11,7 @@ namespace AddressBookProgram
     public class AddressBook_ADO_NET
     {
         List<Contact> addressList = new List<Contact>();
-        public static string connectionString = "Data Source =(localdb)\\MSSQLLocalDB;Initial Catalog =AddressBook_Ado";
+        public static  string connectionString = "Data Source =(localdb)\\MSSQLLocalDB;Initial Catalog =AddressBook_Ado";
         SqlConnection sqlconnection = new SqlConnection(connectionString);
         /// <summary>
         /// Uc16 -Retrive All Data in sql Using Ado.Net
@@ -90,6 +90,30 @@ namespace AddressBookProgram
                         Console.WriteLine("Not Update data in the employeePayRoleTable serivces");
                         return "NotUpdate";
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                this.sqlconnection.Close();
+            }
+        }
+        /// <summary>
+        /// UC19 AggregateOrScalarFunction (count)
+        /// </summary>
+        public int AggGetAllEmployee(string query)
+        {
+            try
+            {
+                using (this.sqlconnection)
+                {
+                    this.sqlconnection.Open();
+                    SqlCommand command = new SqlCommand(query, this.sqlconnection);
+                    int b = (int)command.ExecuteScalar();
+                    return b;
                 }
             }
             catch (Exception ex)
