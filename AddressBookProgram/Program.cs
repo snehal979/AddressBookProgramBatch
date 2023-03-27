@@ -15,7 +15,7 @@ namespace AddressBookProgram
             {
                 Console.WriteLine("Hint 1.Create Contact \n 2.Upadate Contact \n3 Delect Contact\n 4.Display \n5.Dicitionary \n6.Search Person In Contact City Or State" +
                     "\n 7.ViewPersonInCityOrState \n 8.Sort AddressBook List \n 9.Sort List by City_State_Zip\n 10.File Write \n 11.Retrive Data From Database by Ado.net" +
-                    "\n12.Update Record in sql \n 13.Exist");
+                    "\n12.Update Record in sql \n13.Retrive data for perticular period\n 14.Exist");
                 int select = Convert.ToInt32(Console.ReadLine());
                 switch (select)
                 {
@@ -59,10 +59,15 @@ namespace AddressBookProgram
                         addressBook_ADO_NET.GetAllAddressBookData(retriveQuery);
                         break;
                     case 12:
-                        string updateQuery = @"UPDATE AddressBookList SET Lastnames='Borkar' WHERE Firstname='Latatai'";
+                        string updateQuery = @"UPDATE AddressBookList SET Lastnames='Bhagi' WHERE Firstname='Latatai'";
                         addressBook_ADO_NET.UpdateRecordFromAddressBook(updateQuery);
                         break;
                     case 13:
+                        //Uc18 Retrive data At perticular period
+                        string perticularPeriod = @"select * from AddressBookList where DOB BETWEEN '1993-01-16' AND '2000-01-03'"; //year-month-date
+                        addressBook_ADO_NET.GetAllAddressBookData(perticularPeriod);
+                        break;
+                    case 14:
                         flag =false;
                         Console.WriteLine("Exist");
                         break;
