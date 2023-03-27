@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace AddressBookProgram
         public static string connectionString = "Data Source =(localdb)\\MSSQLLocalDB;Initial Catalog =AddressBook_Ado";
         SqlConnection sqlconnection = new SqlConnection(connectionString);
         /// <summary>
-        /// Uc16 -Retrive All Data in Database Using Ado.Net
+        /// Uc16 -Retrive All Data in sql Using Ado.Net
         /// </summary>
         /// <param name="query"></param>
         public int GetAllAddressBookData(string query)
@@ -43,7 +44,7 @@ namespace AddressBookProgram
                         }
                         foreach (var data in addressList)
                         {
-                            Console.WriteLine("Firstame:"+data.FirstName + "  "+"LastName:" + data.LastName + "  "+"Address:" + data.Address + "  "+"City:" + data.City + "  "+"State:" + data.State + "  "+"ZIP:" + data.Zip + "  "+"PhoneNo:" + data.PhoneNUmber+"  "+"Email:"+data.Email);
+                            Console.WriteLine("FirstName:"+data.FirstName + "  "+"LastName:" + data.LastName + "  "+"Address:" + data.Address + "  "+"City:" + data.City + "  "+"State:" + data.State + "  "+"ZIP:" + data.Zip + "  "+"PhoneNo:" + data.PhoneNUmber+"  "+"Email:"+data.Email);
                         }
                         return 1;
                     }
@@ -51,6 +52,42 @@ namespace AddressBookProgram
                     {
                         Console.WriteLine("No Database found");
                         return -1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                this.sqlconnection.Close();
+            }
+        }
+        /// <summary>
+        /// UC17 Update data From Sql
+        /// </summary>
+        /// <param name="payRoll"></param>
+        /// <exception cref="Exception"></exception>
+        public string UpdateRecordFromAddressBook(string query)
+        {
+            try
+            {
+                using (this.sqlconnection)
+                {
+                    this.sqlconnection.Open();
+                    SqlCommand command = new SqlCommand(query, this.sqlconnection);
+                    command.CommandType = CommandType.Text;
+                    int a = command.ExecuteNonQuery();
+                    if (a>0)
+                    {
+                        Console.WriteLine("Update data in the employeePayRoleTable serivces");
+                        return "Update";
+                    }
+                    else
+                    {
+                        Console.WriteLine("Not Update data in the employeePayRoleTable serivces");
+                        return "NotUpdate";
                     }
                 }
             }

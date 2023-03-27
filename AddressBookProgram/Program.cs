@@ -14,7 +14,8 @@ namespace AddressBookProgram
             while (flag)
             {
                 Console.WriteLine("Hint 1.Create Contact \n 2.Upadate Contact \n3 Delect Contact\n 4.Display \n5.Dicitionary \n6.Search Person In Contact City Or State" +
-                    "\n 7.ViewPersonInCityOrState \n 8.Sort AddressBook List \n 9.Sort List by City_State_Zip\n 10.File Write \n 11.Retrive Data From Database by Ado.net \n 12.Exist");
+                    "\n 7.ViewPersonInCityOrState \n 8.Sort AddressBook List \n 9.Sort List by City_State_Zip\n 10.File Write \n 11.Retrive Data From Database by Ado.net" +
+                    "\n12.Update Record in sql \n 13.Exist");
                 int select = Convert.ToInt32(Console.ReadLine());
                 switch (select)
                 {
@@ -58,6 +59,10 @@ namespace AddressBookProgram
                         addressBook_ADO_NET.GetAllAddressBookData(retriveQuery);
                         break;
                     case 12:
+                        string updateQuery = @"UPDATE AddressBookList SET Lastnames='Borkar' WHERE Firstname='Latatai'";
+                        addressBook_ADO_NET.UpdateRecordFromAddressBook(updateQuery);
+                        break;
+                    case 13:
                         flag =false;
                         Console.WriteLine("Exist");
                         break;
